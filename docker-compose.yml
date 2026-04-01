@@ -1,0 +1,182 @@
+# CortexOps - Docker Compose Configuration
+# Production-ready deployment configuration
+
+services:
+  # ==========================================
+  # PostgreSQL Database
+  # ==========================================
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: cortexops-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: cortexops
+      POSTGRES_USER: cortexops
+      POSTGRES_PASSWORD: cortexops_secret
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U cortexops -d cortexops"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - cortexops-network
+
+  # ==========================================
+  # Redis (BullMQ + Caching)
+  # ==========================================
+  redis:
+    image: redis:7-alpine
+    container_name: cortexops-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes --maxmemory 256mb --maxmemory-policy allkeys-lru
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - cortexops-network
+
+  # ==========================================
+  # Main Application (Next.js)
+  # ==========================================
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cortexops-app
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=postgresql://cortexops:cortexops_secret@postgres:5432/cortexops?schema=public&connection_limit=20
+      - AI_ENGINE_URL=http://ai-engine:8100
+      - REDIS_URL=redis://redis:6379
+      - NEXTAUTH_URL=http://localhost:3000
+      - NEXTAUTH_SECRET=${NEXTAUTH_SECRET:-change-me-in-production}
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      ai-engine:
+        condition: service_healthy
+    networks:
+      - cortexops-network
+
+  # ==========================================
+  # AI Engine (Python FastAPI)
+  # ==========================================
+  ai-engine:
+    build:
+      context: ./ai-engine
+      dockerfile: Dockerfile
+    container_name: cortexops-ai-engine
+    ports:
+      - "8100:8100"
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - DATABASE_URL=postgresql://cortexops:cortexops_secret@postgres:5432/cortexops
+      - REDIS_URL=redis://redis:6379
+      - CHROMADB_URL=http://chromadb:8000
+      - LOG_LEVEL=INFO
+      - SANDBOX_ENABLED=true
+      - METRICS_ENABLED=true
+      - GUARDRAILS_MAX_ITERATIONS=10
+      - GUARDRAILS_MAX_COST=1.00
+      - GUARDRAILS_HITL_THRESHOLD=0.7
+    volumes:
+      - ./ai-engine:/app
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8100/ai/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      chromadb:
+        condition: service_started
+    networks:
+      - cortexops-network
+
+  # ==========================================
+  # ChromaDB (Vector Store)
+  # ==========================================
+  chromadb:
+    image: chromadb/chroma:latest
+    container_name: cortexops-chromadb
+    ports:
+      - "8200:8000"
+    volumes:
+      - chroma_data:/chroma/chroma
+    environment:
+      - ALLOW_RESET=true
+    restart: unless-stopped
+    networks:
+      - cortexops-network
+
+  # ==========================================
+  # Workflow Executor Service
+  # ==========================================
+  executor:
+    build:
+      context: ./mini-services/workflow-executor
+      dockerfile: Dockerfile
+    container_name: cortexops-executor
+    ports:
+      - "3003:3003"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=postgresql://cortexops:cortexops_secret@postgres:5432/cortexops
+      - REDIS_URL=redis://redis:6379
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - cortexops-network
+
+  # ==========================================
+  # Sandbox Builder (Builds sandbox image)
+  # ==========================================
+  sandbox-builder:
+    build:
+      context: ./ai-engine/app/security/sandbox
+      dockerfile: Dockerfile.sandbox
+    image: cortexops-sandbox:latest
+    container_name: cortexops-sandbox-builder
+    restart: "no"
+
+volumes:
+  postgres_data:
+  redis_data:
+  chroma_data:
+
+networks:
+  cortexops-network:
+    driver: bridge

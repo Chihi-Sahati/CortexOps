@@ -1,0 +1,295 @@
+// CortexOps - Secure Agentic Workflow Automation Engine
+// Prisma Schema - PostgreSQL
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ==========================================
+// User & Authentication
+// ==========================================
+model User {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  username     String    @unique
+  passwordHash String
+  fullName     String?
+  role         String    @default("viewer") // 'admin', 'developer', 'viewer'
+  isActive     Boolean   @default(true)
+  lastLogin    DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  workflows   Workflow[]
+  credentials Credential[]
+  auditLogs   AuditLog[]
+  apiKeys     ApiKey[]
+
+  @@map("users")
+}
+
+model ApiKey {
+  id        String    @id @default(cuid())
+  userId    String
+  name      String
+  keyHash   String    @unique
+  prefix    String    @db.VarChar(8)
+  lastUsed  DateTime?
+  expiresAt DateTime?
+  createdAt DateTime  @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([keyHash])
+  @@index([prefix])
+  @@map("api_keys")
+}
+
+// ==========================================
+// Workflows
+// ==========================================
+model Workflow {
+  id             String   @id @default(cuid())
+  name           String
+  description    String?
+  ownerId        String
+  status         String   @default("draft") // 'draft', 'active', 'paused', 'archived'
+  isTemplate     Boolean  @default(false)
+  triggerType    String?  // 'manual', 'webhook', 'cron', 'event'
+  cronExpression String?
+  config         Json     @default("{}")
+  tags           String[] @default([])
+  version        Int      @default(1)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  owner      User           @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  nodes      WorkflowNode[]
+  edges      WorkflowEdge[]
+  executions Execution[]
+
+  @@index([ownerId])
+  @@index([status])
+  @@index([triggerType])
+  @@index([updatedAt(sort: Desc)])
+  @@index([name])
+  @@map("workflows")
+}
+
+model WorkflowNode {
+  id           String   @id @default(cuid())
+  workflowId   String
+  type         String   // 'trigger.webhook', 'action.http', 'action.code', etc.
+  name         String
+  config       Json     @default("{}")
+  positionX    Float    @default(0)
+  positionY    Float    @default(0)
+  isEnabled    Boolean  @default(true)
+  createdAt    DateTime @default(now())
+
+  workflow       Workflow        @relation(fields: [workflowId], references: [id], onDelete: Cascade)
+  executionSteps ExecutionStep[]
+
+  @@index([workflowId])
+  @@index([type])
+  @@map("workflow_nodes")
+}
+
+model WorkflowEdge {
+  id           String   @id @default(cuid())
+  workflowId   String
+  sourceNodeId String
+  targetNodeId String
+  condition    Json?
+  label        String?
+  edgeType     String   @default("default") // 'default', 'conditional_true', 'conditional_false', 'error'
+  createdAt    DateTime @default(now())
+
+  workflow Workflow @relation(fields: [workflowId], references: [id], onDelete: Cascade)
+
+  @@index([workflowId])
+  @@index([sourceNodeId])
+  @@index([targetNodeId])
+  @@map("workflow_edges")
+}
+
+// ==========================================
+// Executions
+// ==========================================
+model Execution {
+  id           String    @id @default(cuid())
+  workflowId   String
+  status       String    @default("pending") // 'pending', 'running', 'completed', 'failed', 'cancelled', 'paused_hitl'
+  triggerType  String?
+  triggerData  Json?
+  startedAt    DateTime?
+  completedAt  DateTime?
+  durationMs   Int?
+  errorMessage String?
+  totalTokens  Int       @default(0)
+  totalCost    Float     @default(0)
+  metadata     Json      @default("{}")
+  createdAt    DateTime  @default(now())
+
+  workflow Workflow        @relation(fields: [workflowId], references: [id])
+  steps    ExecutionStep[]
+
+  @@index([workflowId])
+  @@index([status])
+  @@index([createdAt(sort: Desc)])
+  @@index([workflowId, status])
+  @@index([workflowId, createdAt(sort: Desc)])
+  @@map("executions")
+}
+
+model ExecutionStep {
+  id            String    @id @default(cuid())
+  executionId   String
+  nodeId        String?
+  status        String    // 'pending', 'running', 'completed', 'failed', 'skipped', 'retrying'
+  inputData     Json?
+  outputData    Json?
+  errorDetails  Json?
+  strategyUsed  String?   // 'static_api', 'self_healing', 'code_generation', 'fallback'
+  attemptNumber Int       @default(1)
+  tokensUsed    Int       @default(0)
+  cost          Float     @default(0)
+  latencyMs     Int?
+  startedAt     DateTime?
+  completedAt   DateTime?
+  createdAt     DateTime  @default(now())
+
+  execution   Execution     @relation(fields: [executionId], references: [id], onDelete: Cascade)
+  node        WorkflowNode? @relation(fields: [nodeId], references: [id])
+  agentTraces AgentTrace[]
+
+  @@index([executionId])
+  @@index([nodeId])
+  @@index([status])
+  @@index([executionId, status])
+  @@map("execution_steps")
+}
+
+model AgentTrace {
+  id              String    @id @default(cuid())
+  executionStepId String
+  agentType       String    // 'planner', 'reasoner', 'executor', 'validator'
+  thought         String?
+  action          String?
+  actionInput     Json?
+  observation     String?
+  confidenceScore Float?
+  modelUsed       String?
+  tokensUsed      Int?
+  stepNumber      Int?
+  createdAt       DateTime  @default(now())
+
+  executionStep ExecutionStep @relation(fields: [executionStepId], references: [id], onDelete: Cascade)
+
+  @@index([executionStepId])
+  @@index([agentType])
+  @@map("agent_traces")
+}
+
+// ==========================================
+// Credentials (Encrypted)
+// ==========================================
+model Credential {
+  id            String    @id @default(cuid())
+  ownerId       String
+  name          String
+  type          String    // 'api_key', 'oauth2', 'basic_auth', 'bearer_token', 'custom'
+  encryptedData String    // AES-256-GCM encrypted JSON
+  metadata      Json      @default("{}")
+  lastUsedAt    DateTime?
+  expiresAt     DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  owner User @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+
+  @@index([ownerId])
+  @@index([type])
+  @@unique([ownerId, name])
+  @@map("credentials")
+}
+
+// ==========================================
+// Connectors
+// ==========================================
+model Connector {
+  id              String    @id @default(cuid())
+  name            String    @unique
+  type            String    // 'static', 'dynamic', 'self_healed'
+  serviceName     String?
+  baseUrl         String?
+  authType        String?
+  config          Json      @default("{}")
+  healthStatus    String    @default("unknown") // 'healthy', 'degraded', 'down', 'unknown'
+  lastHealthCheck DateTime?
+  selfHealCount   Int       @default(0)
+  lastError       Json?
+  generatedCode   String?
+  isVerified      Boolean   @default(false)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@index([type])
+  @@index([healthStatus])
+  @@index([serviceName])
+  @@map("connectors")
+}
+
+// ==========================================
+// LLM Cache
+// ==========================================
+model LlmCache {
+  id                  String    @id @default(cuid())
+  queryHash           String    @unique // SHA-256 hash of the prompt
+  queryText           String
+  responseText        String
+  modelUsed           String?
+  tokensUsed          Int?
+  similarityThreshold Float     @default(0.95)
+  hitCount            Int       @default(0)
+  createdAt           DateTime  @default(now())
+  expiresAt           DateTime?
+
+  @@index([queryHash])
+  @@index([modelUsed])
+  @@index([expiresAt])
+  @@index([createdAt(sort: Desc)])
+  @@map("llm_cache")
+}
+
+// ==========================================
+// Audit Logs
+// ==========================================
+model AuditLog {
+  id           String    @id @default(cuid())
+  userId       String?
+  action       String    // 'workflow.create', 'workflow.execute', 'code.execute', etc.
+  resourceType String?
+  resourceId   String?
+  details      Json      @default("{}")
+  ipAddress    String?
+  userAgent    String?
+  riskLevel    String    @default("low") // 'low', 'medium', 'high', 'critical'
+  createdAt    DateTime  @default(now())
+
+  user User? @relation(fields: [userId], references: [id])
+
+  @@index([action])
+  @@index([riskLevel])
+  @@index([createdAt(sort: Desc)])
+  @@index([userId])
+  @@index([resourceType, resourceId])
+  @@index([userId, action])
+  @@map("audit_logs")
+}

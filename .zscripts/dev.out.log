@@ -1,0 +1,393 @@
+==========================================
+[2026-03-24 21:06:59] Starting: bun install
+==========================================
+[BUN] Installing dependencies...
+[0.34ms] ".env"
+bun install v1.3.10 (30e609e0)
+
++ @tailwindcss/postcss@4.1.18
++ @types/react@19.2.8
++ @types/react-dom@19.2.3
++ bun-types@1.3.6
++ eslint@9.39.2
++ eslint-config-next@16.1.3
++ tailwindcss@4.1.18
++ tw-animate-css@1.4.0
++ typescript@5.9.3
++ @dnd-kit/core@6.3.1
++ @dnd-kit/sortable@10.0.0
++ @dnd-kit/utilities@3.2.2
++ @hookform/resolvers@5.2.2
++ @mdxeditor/editor@3.52.3
++ @prisma/client@6.19.2
++ @radix-ui/react-accordion@1.2.12
++ @radix-ui/react-alert-dialog@1.1.15
++ @radix-ui/react-aspect-ratio@1.1.8
++ @radix-ui/react-avatar@1.1.11
++ @radix-ui/react-checkbox@1.3.3
++ @radix-ui/react-collapsible@1.1.12
++ @radix-ui/react-context-menu@2.2.16
++ @radix-ui/react-dialog@1.1.15
++ @radix-ui/react-dropdown-menu@2.1.16
++ @radix-ui/react-hover-card@1.1.15
++ @radix-ui/react-label@2.1.8
++ @radix-ui/react-menubar@1.1.16
++ @radix-ui/react-navigation-menu@1.2.14
++ @radix-ui/react-popover@1.1.15
++ @radix-ui/react-progress@1.1.8
++ @radix-ui/react-radio-group@1.3.8
++ @radix-ui/react-scroll-area@1.2.10
++ @radix-ui/react-select@2.2.6
++ @radix-ui/react-separator@1.1.8
++ @radix-ui/react-slider@1.3.6
++ @radix-ui/react-slot@1.2.4
++ @radix-ui/react-switch@1.2.6
++ @radix-ui/react-tabs@1.1.13
++ @radix-ui/react-toast@1.2.15
++ @radix-ui/react-toggle@1.1.10
++ @radix-ui/react-toggle-group@1.1.11
++ @radix-ui/react-tooltip@1.2.8
++ @reactuses/core@6.1.9
++ @tanstack/react-query@5.90.19
++ @tanstack/react-table@8.21.3
++ class-variance-authority@0.7.1
++ clsx@2.1.1
++ cmdk@1.1.1
++ date-fns@4.1.0
++ embla-carousel-react@8.6.0
++ framer-motion@12.26.2
++ input-otp@1.4.2
++ lucide-react@0.525.0
++ next@16.1.3
++ next-auth@4.24.13
++ next-intl@4.7.0
++ next-themes@0.4.6
++ prisma@6.19.2
++ react@19.2.3
++ react-day-picker@9.13.0
++ react-dom@19.2.3
++ react-hook-form@7.71.1
++ react-markdown@10.1.0
++ react-resizable-panels@3.0.6
++ react-syntax-highlighter@15.6.6
++ recharts@2.15.4
++ sharp@0.34.5
++ sonner@2.0.7
++ tailwind-merge@3.4.0
++ tailwindcss-animate@1.0.7
++ uuid@11.1.0
++ vaul@1.1.2
++ z-ai-web-dev-sdk@0.0.17
++ zod@4.3.5
++ zustand@5.0.10
+
+827 packages installed [7.50s]
+==========================================
+[2026-03-24 21:07:07] Completed: bun install
+[LOG] Step: bun install | Duration: 8s
+==========================================
+
+==========================================
+[2026-03-24 21:07:07] Starting: bun run db:push
+==========================================
+[BUN] Setting up database...
+$ prisma db push
+Environment variables loaded from .env
+Prisma schema loaded from prisma/schema.prisma
+Datasource "db": SQLite database "custom.db" at "file:/home/z/my-project/db/custom.db"
+
+SQLite database custom.db created at file:/home/z/my-project/db/custom.db
+
+🚀  Your database is now in sync with your Prisma schema. Done in 19ms
+
+Running generate... (Use --skip-generate to skip the generators)
+[2K[1A[2K[GRunning generate... - Prisma Client
+[2K[1A[2K[G✔ Generated Prisma Client (v6.19.2) to ./node_modules/@prisma/client in 73ms
+┌─────────────────────────────────────────────────────────┐
+│  Update available 6.19.2 -> 7.5.0                       │
+│                                                         │
+│  This is a major update - please follow the guide at    │
+│  https://pris.ly/d/major-version-upgrade                │
+│                                                         │
+│  Run the following to update                            │
+│    npm i --save-dev prisma@latest                       │
+│    npm i @prisma/client@latest                          │
+└─────────────────────────────────────────────────────────┘
+
+==========================================
+[2026-03-24 21:07:08] Completed: bun run db:push
+[LOG] Step: bun run db:push | Duration: 1s
+==========================================
+
+==========================================
+[2026-03-24 21:07:08] Starting: Starting Next.js dev server
+==========================================
+[BUN] Starting development server...
+==========================================
+$ next dev -p 3000 2>&1 | tee dev.log
+[2026-03-24 21:07:08] Completed: Starting Next.js dev server
+[LOG] Step: Starting Next.js dev server | Duration: 0s
+==========================================
+
+==========================================
+[2026-03-24 21:07:08] Starting: Waiting for Next.js dev server
+==========================================
+Waiting for Next.js dev server to be ready on localhost:3000...
+Attempt 1/60: Next.js dev server not ready yet, waiting...
+▲ Next.js 16.1.3 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://21.0.11.58:3000
+- Environments: .env
+
+✓ Starting...
+Attention: Next.js now collects completely anonymous telemetry regarding usage.
+This information is used to shape Next.js' roadmap and prioritize features.
+You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+https://nextjs.org/telemetry
+
+
+  We detected TypeScript in your project and reconfigured your tsconfig.json file for you.
+  The following suggested values were added to your tsconfig.json. These values can be changed to fit your project's needs:
+
+  	- include was updated to add '.next/dev/types/**/*.ts'
+
+  The following mandatory changes were made to your tsconfig.json:
+
+  	- jsx was set to react-jsx (next.js uses the React automatic runtime)
+
+✓ Ready in 885ms
+ GET / 200 in 2.7s (compile: 2.5s, render: 159ms)
+Next.js dev server is ready!
+==========================================
+[2026-03-24 21:07:12] Completed: Waiting for Next.js dev server
+[LOG] Step: Waiting for Next.js dev server | Duration: 4s
+==========================================
+
+==========================================
+[2026-03-24 21:07:12] Starting: Health check
+==========================================
+[BUN] Performing health check...
+ GET / 200 in 24ms (compile: 2ms, render: 22ms)
+[BUN] Health check passed
+==========================================
+[2026-03-24 21:07:12] Completed: Health check
+[LOG] Step: Health check | Duration: 0s
+==========================================
+
+==========================================
+[2026-03-24 21:07:12] Starting: Starting mini-services
+==========================================
+Found mini-services directory, scanning for sub-services...
+Mini-services startup completed. Started 0 service(s).
+==========================================
+[2026-03-24 21:07:12] Completed: Starting mini-services
+[LOG] Step: Starting mini-services | Duration: 0s
+==========================================
+
+Next.js dev server is running in background (PID: 664).
+Use 'kill 664' to stop it.
+ GET / 200 in 41ms (compile: 4ms, render: 37ms)
+✓ Compiled in 201ms
+✓ Compiled in 136ms
+ GET / 200 in 74ms (compile: 46ms, render: 28ms)
+ GET / 200 in 17ms (compile: 2ms, render: 15ms)
+ GET / 200 in 16ms (compile: 2ms, render: 14ms)
+ GET / 200 in 19ms (compile: 3ms, render: 16ms)
+ GET / 200 in 13ms (compile: 1769µs, render: 11ms)
+ GET / 200 in 15ms (compile: 2ms, render: 12ms)
+ GET / 200 in 19ms (compile: 3ms, render: 17ms)
+ GET / 200 in 18ms (compile: 2ms, render: 16ms)
+ GET / 200 in 68ms (compile: 34ms, render: 35ms)
+ GET / 200 in 12ms (compile: 1721µs, render: 11ms)
+ GET / 200 in 11ms (compile: 1477µs, render: 9ms)
+ GET / 200 in 10ms (compile: 1411µs, render: 9ms)
+ GET / 200 in 12ms (compile: 1878µs, render: 10ms)
+ GET / 200 in 17ms (compile: 1577µs, render: 15ms)
+ GET / 200 in 11ms (compile: 1382µs, render: 10ms)
+ GET / 200 in 12ms (compile: 2ms, render: 10ms)
+ GET / 200 in 16ms (compile: 1737µs, render: 14ms)
+ GET / 200 in 28ms (compile: 9ms, render: 19ms)
+ GET / 200 in 21ms (compile: 4ms, render: 17ms)
+ GET / 200 in 16ms (compile: 1871µs, render: 15ms)
+ GET / 200 in 17ms (compile: 3ms, render: 14ms)
+ GET / 200 in 13ms (compile: 1818µs, render: 12ms)
+ GET / 200 in 15ms (compile: 1667µs, render: 13ms)
+ GET / 200 in 13ms (compile: 1529µs, render: 12ms)
+ GET / 200 in 19ms (compile: 2ms, render: 17ms)
+ GET / 200 in 12ms (compile: 1570µs, render: 11ms)
+ GET / 200 in 13ms (compile: 1623µs, render: 11ms)
+ GET / 200 in 13ms (compile: 1502µs, render: 11ms)
+ GET / 200 in 17ms (compile: 1972µs, render: 15ms)
+ GET / 200 in 61ms (compile: 29ms, render: 32ms)
+ GET / 200 in 13ms (compile: 1497µs, render: 11ms)
+ GET / 200 in 12ms (compile: 1702µs, render: 10ms)
+ GET / 200 in 16ms (compile: 1889µs, render: 14ms)
+ GET / 200 in 19ms (compile: 3ms, render: 16ms)
+ GET / 200 in 15ms (compile: 1717µs, render: 14ms)
+ GET / 200 in 16ms (compile: 2ms, render: 14ms)
+ GET / 200 in 20ms (compile: 2ms, render: 18ms)
+ GET / 200 in 12ms (compile: 1798µs, render: 10ms)
+ GET / 200 in 12ms (compile: 1568µs, render: 10ms)
+ GET / 200 in 17ms (compile: 2ms, render: 15ms)
+ GET / 200 in 12ms (compile: 1631µs, render: 11ms)
+ GET / 200 in 13ms (compile: 1872µs, render: 11ms)
+ GET / 200 in 20ms (compile: 1509µs, render: 19ms)
+ GET / 200 in 60ms (compile: 37ms, render: 24ms)
+ GET / 200 in 34ms (compile: 3ms, render: 31ms)
+ GET / 200 in 13ms (compile: 1640µs, render: 11ms)
+ GET / 200 in 13ms (compile: 1705µs, render: 11ms)
+ GET / 200 in 22ms (compile: 4ms, render: 19ms)
+ GET / 200 in 20ms (compile: 2ms, render: 17ms)
+ GET / 200 in 12ms (compile: 1885µs, render: 10ms)
+ GET / 200 in 16ms (compile: 1690µs, render: 14ms)
+ GET / 200 in 26ms (compile: 2ms, render: 24ms)
+ GET / 200 in 13ms (compile: 1947µs, render: 12ms)
+ GET / 200 in 14ms (compile: 1818µs, render: 12ms)
+ GET / 200 in 18ms (compile: 1826µs, render: 16ms)
+ GET / 200 in 14ms (compile: 2ms, render: 11ms)
+ GET / 200 in 12ms (compile: 1713µs, render: 10ms)
+ GET / 200 in 16ms (compile: 1643µs, render: 15ms)
+ GET / 200 in 13ms (compile: 1973µs, render: 11ms)
+ GET / 200 in 68ms (compile: 36ms, render: 32ms)
+ GET / 200 in 13ms (compile: 1747µs, render: 11ms)
+ GET / 200 in 12ms (compile: 1739µs, render: 10ms)
+ GET / 200 in 17ms (compile: 7ms, render: 11ms)
+ GET / 200 in 12ms (compile: 1656µs, render: 10ms)
+ GET / 200 in 17ms (compile: 1939µs, render: 15ms)
+ GET / 200 in 16ms (compile: 2ms, render: 14ms)
+ GET / 200 in 15ms (compile: 2ms, render: 13ms)
+ GET / 200 in 10ms (compile: 1518µs, render: 9ms)
+ GET / 200 in 13ms (compile: 1384µs, render: 12ms)
+ GET / 200 in 16ms (compile: 2ms, render: 14ms)
+ GET / 200 in 17ms (compile: 2ms, render: 15ms)
+ GET / 200 in 17ms (compile: 2ms, render: 14ms)
+ GET / 200 in 20ms (compile: 1981µs, render: 19ms)
+ GET / 200 in 13ms (compile: 2ms, render: 11ms)
+ GET / 200 in 12ms (compile: 1722µs, render: 10ms)
+ GET / 200 in 12ms (compile: 1979µs, render: 10ms)
+ GET / 200 in 15ms (compile: 1917µs, render: 13ms)
+✓ Compiled in 165ms
+ GET / 200 in 15ms (compile: 1548µs, render: 13ms)
+ GET / 200 in 137ms (compile: 43ms, render: 95ms)
+✓ Compiled in 220ms
+✓ Compiled in 1183ms
+ GET / 200 in 66ms (compile: 52ms, render: 14ms)
+⚠ Cross origin request detected from preview-chat-87e2633c-04ea-4378-b2ef-13f47dd0d17f.space.z.ai to /_next/* resource. In a future major version of Next.js, you will need to explicitly configure "allowedDevOrigins" in next.config to allow this.
+Read more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allowedDevOrigins
+⚠ Fast Refresh had to perform a full reload when ./src/app/page.tsx changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ GET / 200 in 185ms (compile: 2ms, render: 182ms)
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Execution`.`id` FROM `main`.`Execution` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Workflow`.`id` FROM `main`.`Workflow` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT `main`.`Workflow`.`id`, `main`.`Workflow`.`name`, `main`.`Workflow`.`description`, `main`.`Workflow`.`ownerId`, `main`.`Workflow`.`status`, `main`.`Workflow`.`isTemplate`, `main`.`Workflow`.`triggerType`, `main`.`Workflow`.`cronExpression`, `main`.`Workflow`.`config`, `main`.`Workflow`.`tags`, `main`.`Workflow`.`version`, `main`.`Workflow`.`createdAt`, `main`.`Workflow`.`updatedAt` FROM `main`.`Workflow` WHERE 1=1 ORDER BY `main`.`Workflow`.`updatedAt` DESC LIMIT ? OFFSET ?
+prisma:query SELECT `main`.`Execution`.`id`, `main`.`Execution`.`workflowId`, `main`.`Execution`.`status`, `main`.`Execution`.`triggerType`, `main`.`Execution`.`triggerData`, `main`.`Execution`.`startedAt`, `main`.`Execution`.`completedAt`, `main`.`Execution`.`durationMs`, `main`.`Execution`.`errorMessage`, `main`.`Execution`.`totalTokens`, `main`.`Execution`.`totalCost`, `main`.`Execution`.`metadata`, `main`.`Execution`.`createdAt` FROM `main`.`Execution` WHERE 1=1 ORDER BY `main`.`Execution`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /api/executions?limit=10 200 in 385ms (compile: 307ms, render: 78ms)
+ GET /api/workflows 200 in 385ms (compile: 344ms, render: 42ms)
+ GET / 200 in 55ms (compile: 3ms, render: 52ms)
+ GET /api/executions?limit=10 200 in 10ms (compile: 1968µs, render: 9ms)
+prisma:query SELECT 1
+prisma:query SELECT 1
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Execution`.`id` FROM `main`.`Execution` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT `main`.`Execution`.`id`, `main`.`Execution`.`workflowId`, `main`.`Execution`.`status`, `main`.`Execution`.`triggerType`, `main`.`Execution`.`triggerData`, `main`.`Execution`.`startedAt`, `main`.`Execution`.`completedAt`, `main`.`Execution`.`durationMs`, `main`.`Execution`.`errorMessage`, `main`.`Execution`.`totalTokens`, `main`.`Execution`.`totalCost`, `main`.`Execution`.`metadata`, `main`.`Execution`.`createdAt` FROM `main`.`Execution` WHERE 1=1 ORDER BY `main`.`Execution`.`createdAt` DESC LIMIT ? OFFSET ?
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Workflow`.`id` FROM `main`.`Workflow` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT `main`.`Workflow`.`id`, `main`.`Workflow`.`name`, `main`.`Workflow`.`description`, `main`.`Workflow`.`ownerId`, `main`.`Workflow`.`status`, `main`.`Workflow`.`isTemplate`, `main`.`Workflow`.`triggerType`, `main`.`Workflow`.`cronExpression`, `main`.`Workflow`.`config`, `main`.`Workflow`.`tags`, `main`.`Workflow`.`version`, `main`.`Workflow`.`createdAt`, `main`.`Workflow`.`updatedAt` FROM `main`.`Workflow` WHERE 1=1 ORDER BY `main`.`Workflow`.`updatedAt` DESC LIMIT ? OFFSET ?
+ GET /api/workflows 200 in 7ms (compile: 1377µs, render: 5ms)
+ GET / 200 in 50ms (compile: 2ms, render: 48ms)
+prisma:query SELECT 1
+prisma:query SELECT 1
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Execution`.`id` FROM `main`.`Execution` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT `main`.`Execution`.`id`, `main`.`Execution`.`workflowId`, `main`.`Execution`.`status`, `main`.`Execution`.`triggerType`, `main`.`Execution`.`triggerData`, `main`.`Execution`.`startedAt`, `main`.`Execution`.`completedAt`, `main`.`Execution`.`durationMs`, `main`.`Execution`.`errorMessage`, `main`.`Execution`.`totalTokens`, `main`.`Execution`.`totalCost`, `main`.`Execution`.`metadata`, `main`.`Execution`.`createdAt` FROM `main`.`Execution` WHERE 1=1 ORDER BY `main`.`Execution`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /api/executions?limit=10 200 in 10ms (compile: 2ms, render: 8ms)
+ GET /api/workflows 200 in 8ms (compile: 1908µs, render: 6ms)
+prisma:query SELECT `main`.`Workflow`.`id`, `main`.`Workflow`.`name`, `main`.`Workflow`.`description`, `main`.`Workflow`.`ownerId`, `main`.`Workflow`.`status`, `main`.`Workflow`.`isTemplate`, `main`.`Workflow`.`triggerType`, `main`.`Workflow`.`cronExpression`, `main`.`Workflow`.`config`, `main`.`Workflow`.`tags`, `main`.`Workflow`.`version`, `main`.`Workflow`.`createdAt`, `main`.`Workflow`.`updatedAt` FROM `main`.`Workflow` WHERE 1=1 ORDER BY `main`.`Workflow`.`updatedAt` DESC LIMIT ? OFFSET ?
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Workflow`.`id` FROM `main`.`Workflow` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+ GET / 200 in 35ms (compile: 1897µs, render: 34ms)
+ GET / 200 in 33ms (compile: 3ms, render: 30ms)
+ GET /api/workflows 200 in 7ms (compile: 1576µs, render: 5ms)
+prisma:query SELECT 1
+prisma:query SELECT 1
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Workflow`.`id` FROM `main`.`Workflow` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT `main`.`Workflow`.`id`, `main`.`Workflow`.`name`, `main`.`Workflow`.`description`, `main`.`Workflow`.`ownerId`, `main`.`Workflow`.`status`, `main`.`Workflow`.`isTemplate`, `main`.`Workflow`.`triggerType`, `main`.`Workflow`.`cronExpression`, `main`.`Workflow`.`config`, `main`.`Workflow`.`tags`, `main`.`Workflow`.`version`, `main`.`Workflow`.`createdAt`, `main`.`Workflow`.`updatedAt` FROM `main`.`Workflow` WHERE 1=1 ORDER BY `main`.`Workflow`.`updatedAt` DESC LIMIT ? OFFSET ?
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Execution`.`id` FROM `main`.`Execution` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT `main`.`Execution`.`id`, `main`.`Execution`.`workflowId`, `main`.`Execution`.`status`, `main`.`Execution`.`triggerType`, `main`.`Execution`.`triggerData`, `main`.`Execution`.`startedAt`, `main`.`Execution`.`completedAt`, `main`.`Execution`.`durationMs`, `main`.`Execution`.`errorMessage`, `main`.`Execution`.`totalTokens`, `main`.`Execution`.`totalCost`, `main`.`Execution`.`metadata`, `main`.`Execution`.`createdAt` FROM `main`.`Execution` WHERE 1=1 ORDER BY `main`.`Execution`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /api/executions?limit=10 200 in 5ms (compile: 1175µs, render: 3ms)
+prisma:query SELECT 1
+prisma:query BEGIN IMMEDIATE
+prisma:query INSERT INTO `main`.`Workflow` (`id`, `name`, `description`, `ownerId`, `status`, `isTemplate`, `config`, `tags`, `version`, `createdAt`, `updatedAt`) VALUES (?,?,?,?,?,?,?,?,?,?,?) RETURNING `id` AS `id`
+Error creating workflow: Error [PrismaClientKnownRequestError]: 
+Invalid `__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$db$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["db"].workflow.create()` invocation in
+/home/z/my-project/.next/dev/server/chunks/[root-of-the-server]__39bd2a13._.js:151:162
+
+  148 const body = await request.json();
+  149 const { name, description, triggerType, cronExpression, config, tags, nodes, edges } = body;
+  150 // Create workflow with nodes and edges
+→ 151 const workflow = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$db$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["db"].workflow.create(
+Foreign key constraint violated on the foreign key
+    at <unknown> (src/app/api/workflows/route.ts:66:40)
+    at async POST (src/app/api/workflows/route.ts:66:22)
+  64 |
+  65 |     // Create workflow with nodes and edges
+> 66 |     const workflow = await db.workflow.create({
+     |                                        ^
+  67 |       data: {
+  68 |         name,
+  69 |         description, {
+  code: 'P2003',
+  meta: [Object],
+  clientVersion: '6.19.2'
+}
+ POST /api/workflows 500 in 244ms (compile: 1613µs, render: 242ms)
+prisma:query ROLLBACK
+prisma:query BEGIN IMMEDIATE
+prisma:query INSERT INTO `main`.`Workflow` (`id`, `name`, `description`, `ownerId`, `status`, `isTemplate`, `config`, `tags`, `version`, `createdAt`, `updatedAt`) VALUES (?,?,?,?,?,?,?,?,?,?,?) RETURNING `id` AS `id`
+prisma:query ROLLBACK
+Error creating workflow: Error [PrismaClientKnownRequestError]: 
+Invalid `__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$db$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["db"].workflow.create()` invocation in
+/home/z/my-project/.next/dev/server/chunks/[root-of-the-server]__39bd2a13._.js:151:162
+
+  148 const body = await request.json();
+  149 const { name, description, triggerType, cronExpression, config, tags, nodes, edges } = body;
+  150 // Create workflow with nodes and edges
+→ 151 const workflow = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$db$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["db"].workflow.create(
+Foreign key constraint violated on the foreign key
+    at <unknown> (src/app/api/workflows/route.ts:66:40)
+    at async POST (src/app/api/workflows/route.ts:66:22)
+  64 |
+  65 |     // Create workflow with nodes and edges
+> 66 |     const workflow = await db.workflow.create({
+     |                                        ^
+  67 |       data: {
+  68 |         name,
+  69 |         description, {
+  code: 'P2003',
+  meta: [Object],
+  clientVersion: '6.19.2'
+}
+ POST /api/workflows 500 in 170ms (compile: 2ms, render: 168ms)
+ GET / 200 in 58ms (compile: 6ms, render: 52ms)
+ GET /api/workflows 200 in 13ms (compile: 2ms, render: 11ms)
+prisma:query SELECT 1
+prisma:query SELECT 1
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Workflow`.`id` FROM `main`.`Workflow` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT `main`.`Workflow`.`id`, `main`.`Workflow`.`name`, `main`.`Workflow`.`description`, `main`.`Workflow`.`ownerId`, `main`.`Workflow`.`status`, `main`.`Workflow`.`isTemplate`, `main`.`Workflow`.`triggerType`, `main`.`Workflow`.`cronExpression`, `main`.`Workflow`.`config`, `main`.`Workflow`.`tags`, `main`.`Workflow`.`version`, `main`.`Workflow`.`createdAt`, `main`.`Workflow`.`updatedAt` FROM `main`.`Workflow` WHERE 1=1 ORDER BY `main`.`Workflow`.`updatedAt` DESC LIMIT ? OFFSET ?
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Execution`.`id` FROM `main`.`Execution` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT `main`.`Execution`.`id`, `main`.`Execution`.`workflowId`, `main`.`Execution`.`status`, `main`.`Execution`.`triggerType`, `main`.`Execution`.`triggerData`, `main`.`Execution`.`startedAt`, `main`.`Execution`.`completedAt`, `main`.`Execution`.`durationMs`, `main`.`Execution`.`errorMessage`, `main`.`Execution`.`totalTokens`, `main`.`Execution`.`totalCost`, `main`.`Execution`.`metadata`, `main`.`Execution`.`createdAt` FROM `main`.`Execution` WHERE 1=1 ORDER BY `main`.`Execution`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /api/executions?limit=10 200 in 6ms (compile: 1652µs, render: 5ms)
+✓ Compiled in 186ms
+ GET / 200 in 57ms (compile: 4ms, render: 53ms)
+prisma:query SELECT 1
+prisma:query SELECT `main`.`Workflow`.`id`, `main`.`Workflow`.`name`, `main`.`Workflow`.`description`, `main`.`Workflow`.`ownerId`, `main`.`Workflow`.`status`, `main`.`Workflow`.`isTemplate`, `main`.`Workflow`.`triggerType`, `main`.`Workflow`.`cronExpression`, `main`.`Workflow`.`config`, `main`.`Workflow`.`tags`, `main`.`Workflow`.`version`, `main`.`Workflow`.`createdAt`, `main`.`Workflow`.`updatedAt` FROM `main`.`Workflow` WHERE 1=1 ORDER BY `main`.`Workflow`.`updatedAt` DESC LIMIT ? OFFSET ?
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Workflow`.`id` FROM `main`.`Workflow` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+ GET /api/workflows 200 in 7ms (compile: 2ms, render: 5ms)
+prisma:query SELECT 1
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Execution`.`id` FROM `main`.`Execution` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT `main`.`Execution`.`id`, `main`.`Execution`.`workflowId`, `main`.`Execution`.`status`, `main`.`Execution`.`triggerType`, `main`.`Execution`.`triggerData`, `main`.`Execution`.`startedAt`, `main`.`Execution`.`completedAt`, `main`.`Execution`.`durationMs`, `main`.`Execution`.`errorMessage`, `main`.`Execution`.`totalTokens`, `main`.`Execution`.`totalCost`, `main`.`Execution`.`metadata`, `main`.`Execution`.`createdAt` FROM `main`.`Execution` WHERE 1=1 ORDER BY `main`.`Execution`.`createdAt` DESC LIMIT ? OFFSET ?
+ GET /api/executions?limit=10 200 in 4ms (compile: 1076µs, render: 3ms)
+ GET / 200 in 42ms (compile: 2ms, render: 40ms)
+prisma:query SELECT 1
+prisma:query SELECT `main`.`Execution`.`id`, `main`.`Execution`.`workflowId`, `main`.`Execution`.`status`, `main`.`Execution`.`triggerType`, `main`.`Execution`.`triggerData`, `main`.`Execution`.`startedAt`, `main`.`Execution`.`completedAt`, `main`.`Execution`.`durationMs`, `main`.`Execution`.`errorMessage`, `main`.`Execution`.`totalTokens`, `main`.`Execution`.`totalCost`, `main`.`Execution`.`metadata`, `main`.`Execution`.`createdAt` FROM `main`.`Execution` WHERE 1=1 ORDER BY `main`.`Execution`.`createdAt` DESC LIMIT ? OFFSET ?
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Execution`.`id` FROM `main`.`Execution` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+ GET /api/executions?limit=10 200 in 7ms (compile: 1671µs, render: 5ms)
+prisma:query SELECT 1
+prisma:query SELECT COUNT(*) AS `_count$_all` FROM (SELECT `main`.`Workflow`.`id` FROM `main`.`Workflow` WHERE 1=1 LIMIT ? OFFSET ?) AS `sub`
+prisma:query SELECT `main`.`Workflow`.`id`, `main`.`Workflow`.`name`, `main`.`Workflow`.`description`, `main`.`Workflow`.`ownerId`, `main`.`Workflow`.`status`, `main`.`Workflow`.`isTemplate`, `main`.`Workflow`.`triggerType`, `main`.`Workflow`.`cronExpression`, `main`.`Workflow`.`config`, `main`.`Workflow`.`tags`, `main`.`Workflow`.`version`, `main`.`Workflow`.`createdAt`, `main`.`Workflow`.`updatedAt` FROM `main`.`Workflow` WHERE 1=1 ORDER BY `main`.`Workflow`.`updatedAt` DESC LIMIT ? OFFSET ?
+ GET /api/workflows 200 in 6ms (compile: 1228µs, render: 5ms)

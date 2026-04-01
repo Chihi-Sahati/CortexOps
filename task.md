@@ -1,0 +1,24 @@
+- [x] **Step 1: Fix Critical Issues**
+  - [x] Fix ESLint in `CustomNode.tsx` (memoize Icons)
+  - [x] Fix ESLint in `useWorkflowSocket.ts` (`connect` before declaration)
+- [x] **Step 2: Simple Design System**
+  - [x] Create `src/styles/variables.css`
+  - [x] Import `variables.css` in `src/app/layout.tsx`
+  - [x] Integrate variables into `globals.css` base layers
+- [x] **Step 3: Build Core UI Components**
+  - [x] Update `button.tsx` with `loading` and `disabled` states
+  - [x] Recreate `Toolbar.tsx` with "Add Node", "Save", "Run", "Undo/Redo", "Fit View"
+  - [x] Integrated `sonner` toasts for feedback
+- [x] **Step 4: Improve Workflow Editor**
+  - [x] Refactored `node-registry.ts` with consistent types and categories
+  - [x] Improved `CustomNode.tsx` UI (Refined borders, spacing, AI indicators)
+  - [x] Updated `WorkflowCanvas.tsx` for better background and controls
+- [x] **Step 5: UX Feedback Enhancements**
+  - [x] Loading states for "Run" and "Save" in the toolbar
+  - [x] Success notifications after key actions
+- [x] **Step 6: Empty States & Error Handling**
+  - [x] Created reusable `EmptyState.tsx` component
+  - [x] Implemented empty state in the editor canvas
+- [x] **Step 7: Natural Language (NL) Input Polish**
+  - [x] Enhanced `ChatInterface.tsx` with prompt pills and better input
+  - [x] Polished `EnhancedCommandPalette.tsx` for a "Command Bar" feel
